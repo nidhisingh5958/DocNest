@@ -78,63 +78,79 @@ class _AppDrawerState extends State<AppDrawer> {
         borderRadius: BorderRadius.horizontal(right: Radius.circular(24)),
       ),
       child: SafeArea(
-        child: Column(
-          children: [
-            // ── Header ────────────────────────────────────────────────────
-            _buildHeader(),
-
-            // ── Stats row ─────────────────────────────────────────────────
-            _buildStatsRow(),
-
-            const SizedBox(height: 8),
-            const Divider(height: 1),
-            const SizedBox(height: 8),
-
-            // ── Navigation items ──────────────────────────────────────────
-            _drawerItem(
-              icon: Icons.document_scanner_rounded,
-              label: 'Scan',
-              subtitle: 'Camera document scanner',
-              color: DocNestTheme.accent,
-              onTap: () => _navigate(0),
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: ConstrainedBox(
+            // Ensure the column fills at least the available height
+            // so short content doesn't bunch at the top
+            constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom,
             ),
-            _drawerItem(
-              icon: Icons.folder_rounded,
-              label: 'Documents',
-              subtitle: 'Browse your saved files',
-              color: const Color(0xFF4ECDC4),
-              onTap: () => _navigate(1),
+            child: IntrinsicHeight(
+              child: Column(
+                children: [
+                  // ── Header ──────────────────────────────────────────────
+                  _buildHeader(),
+
+                  // ── Stats row ───────────────────────────────────────────
+                  _buildStatsRow(),
+
+                  const SizedBox(height: 8),
+                  const Divider(height: 1),
+                  const SizedBox(height: 8),
+
+                  // ── Navigation items ─────────────────────────────────────
+                  _drawerItem(
+                    icon: Icons.document_scanner_rounded,
+                    label: 'Scan',
+                    subtitle: 'Camera document scanner',
+                    color: DocNestTheme.accent,
+                    onTap: () => _navigate(0),
+                  ),
+                  _drawerItem(
+                    icon: Icons.folder_rounded,
+                    label: 'Documents',
+                    subtitle: 'Browse your saved files',
+                    color: const Color(0xFF4ECDC4),
+                    onTap: () => _navigate(1),
+                  ),
+                  _drawerItem(
+                    icon: Icons.share_rounded,
+                    label: 'Share',
+                    subtitle: 'Bluetooth · Wi-Fi Direct',
+                    color: const Color(0xFF9B59B6),
+                    onTap: () => _navigate(2),
+                  ),
+
+                  const SizedBox(height: 8),
+                  const Divider(height: 1),
+                  const SizedBox(height: 8),
+
+                  // ── Settings ─────────────────────────────────────────────
+                  _drawerItem(
+                    icon: Icons.settings_outlined,
+                    label: 'Settings',
+                    subtitle: _lockEnabled ? 'App lock enabled' : 'App lock · storage',
+                    color: DocNestTheme.textSecondary,
+                    onTap: _openSettings,
+                    trailing: _lockEnabled
+                      ? const Icon(Icons.lock_rounded, size: 14,
+                          color: DocNestTheme.accent)
+                      : null,
+                  ),
+
+                  // Spacer replacement: flexible empty space that grows
+                  // without causing overflow
+                  const Spacer(),
+
+                  // ── App info footer ───────────────────────────────────────
+                  _buildFooter(),
+                ],
+              ),
             ),
-            _drawerItem(
-              icon: Icons.share_rounded,
-              label: 'Share',
-              subtitle: 'Bluetooth · Wi-Fi Direct',
-              color: const Color(0xFF9B59B6),
-              onTap: () => _navigate(2),
-            ),
-
-            const SizedBox(height: 8),
-            const Divider(height: 1),
-            const SizedBox(height: 8),
-
-            // ── Settings ──────────────────────────────────────────────────
-            _drawerItem(
-              icon: Icons.settings_outlined,
-              label: 'Settings',
-              subtitle: _lockEnabled ? 'App lock enabled' : 'App lock · storage',
-              color: DocNestTheme.textSecondary,
-              onTap: _openSettings,
-              trailing: _lockEnabled
-                ? const Icon(Icons.lock_rounded, size: 14,
-                    color: DocNestTheme.accent)
-                : null,
-            ),
-
-            const Spacer(),
-
-            // ── App info footer ───────────────────────────────────────────
-            _buildFooter(),
-          ],
+          ),
         ),
       ),
     );
