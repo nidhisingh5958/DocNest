@@ -55,10 +55,6 @@ class AuthService {
     try {
       return await _localAuth.authenticate(
         localizedReason: 'Authenticate to open DocNest',
-        options: const AuthenticationOptions(
-          biometricOnly: false, // Allow device PIN as fallback
-          stickyAuth: true,
-        ),
       );
     } on PlatformException {
       return false;

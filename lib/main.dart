@@ -10,6 +10,7 @@ import 'screens/documents_screen.dart';
 import 'screens/share_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/lock_screen.dart';
+import 'widgets/app_drawer.dart';
 import 'utils/theme.dart';
 
 void main() {
@@ -101,7 +102,7 @@ class _AppGateState extends State<AppGate> {
   }
 }
 
-// ── Main Shell: bottom navigation with 3 tabs ─────────────────────────────────
+// ── Main Shell: bottom navigation with 3 tabs + side drawer ──────────────────
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
 
@@ -112,6 +113,9 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
+  // GlobalKey lets us open the drawer programmatically from child widgets
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   // Keep all screens alive for fast tab switching
   final List<Widget> _screens = const [
     ScanScreen(),
@@ -119,17 +123,82 @@ class _MainShellState extends State<MainShell> {
     ShareScreen(),
   ];
 
+  // Tab metadata for the AppBar title
+  static const List<String> _tabTitles = ['DocNest', 'Documents', 'Share'];
+  static const List<IconData> _tabIcons = [
+    Icons.document_scanner_rounded,
+    Icons.folder_rounded,
+    Icons.share_rounded,
+  ];
+
   void _onTabTapped(int index) {
     setState(() => _currentIndex = index);
   }
 
+  void _openDrawer() => _scaffoldKey.currentState?.openDrawer();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+
+      // ── App Bar with hamburger ────────────────────────────────────────
+      appBar: AppBar(
+        backgroundColor: DocNestTheme.surface,
+        elevation: 0,
+        scrolledUnderElevation: 1,
+        shadowColor: const Color(0x14000000),
+        leadingWidth: 56,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            icon: const Icon(Icons.menu_rounded),
+            color: DocNestTheme.primary,
+            tooltip: 'Open menu',
+            onPressed: _openDrawer,
+          ),
+        ),
+        title: Row(
+          children: [
+            Icon(_tabIcons[_currentIndex],
+              size: 20, color: DocNestTheme.accent),
+            const SizedBox(width: 8),
+            Text(
+              _tabTitles[_currentIndex],
+              style: const TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w700,
+                color: DocNestTheme.primary, letterSpacing: -0.3,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          // Quick settings shortcut in the app bar
+          IconButton(
+            icon: const Icon(Icons.settings_outlined, size: 22),
+            color: DocNestTheme.textSecondary,
+            tooltip: 'Settings',
+            onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const SettingsScreen())),
+          ),
+          const SizedBox(width: 4),
+        ],
+      ),
+
+      // ── Side Drawer ───────────────────────────────────────────────────
+      drawer: AppDrawer(
+        onNavigate: (tabIndex) {
+          setState(() => _currentIndex = tabIndex);
+        },
+      ),
+
+      // ── Body: tabs kept alive ─────────────────────────────────────────
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
       ),
+
+      // ── Bottom Navigation ─────────────────────────────────────────────
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           border: Border(top: BorderSide(color: DocNestTheme.border, width: 1)),
@@ -156,19 +225,6 @@ class _MainShellState extends State<MainShell> {
           ],
         ),
       ),
-      // Settings accessible from Documents tab header
-      floatingActionButton: _currentIndex == 1
-          ? FloatingActionButton.small(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SettingsScreen()),
-              ),
-              backgroundColor: DocNestTheme.surface,
-              foregroundColor: DocNestTheme.textSecondary,
-              elevation: 0,
-              child: const Icon(Icons.settings_outlined),
-            )
-          : null,
     );
   }
 }

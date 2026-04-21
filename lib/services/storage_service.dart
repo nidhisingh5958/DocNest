@@ -62,12 +62,12 @@ class StorageService {
         for (int y = 0; y < image.height; y++) {
           for (int x = 0; x < image.width; x++) {
             final pixel = image.getPixel(x, y);
-            final brightness = img.getRed(pixel);
+            final brightness = pixel.r;
             image.setPixel(
               x, y,
               brightness > 128
-                  ? img.getColor(255, 255, 255)
-                  : img.getColor(0, 0, 0),
+                  ? img.ColorRgb8(255, 255, 255)
+                  : img.ColorRgb8(0, 0, 0),
             );
           }
         }

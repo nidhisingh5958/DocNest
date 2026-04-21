@@ -70,29 +70,6 @@ class _ShareScreenState extends State<ShareScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Header ────────────────────────────────────────────────────
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Share',
-                    style: TextStyle(
-                      fontSize: 28, fontWeight: FontWeight.w800,
-                      color: DocNestTheme.primary, letterSpacing: -0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Select documents to share locally',
-                    style: TextStyle(color: DocNestTheme.textSecondary, fontSize: 13),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
             // ── Share info banner ─────────────────────────────────────────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),

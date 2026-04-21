@@ -108,35 +108,22 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Header ────────────────────────────────────────────────────
+            // ── Grid/List toggle ──────────────────────────────────────────
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Documents',
-                        style: TextStyle(
-                          fontSize: 28, fontWeight: FontWeight.w800,
-                          color: DocNestTheme.primary, letterSpacing: -0.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  // Toggle list/grid
                   IconButton(
                     icon: Icon(_isGridView ? Icons.view_list_rounded
                                            : Icons.grid_view_rounded),
                     color: DocNestTheme.textSecondary,
+                    tooltip: _isGridView ? 'List view' : 'Grid view',
                     onPressed: () => setState(() => _isGridView = !_isGridView),
                   ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 12),
 
             // ── Search bar ────────────────────────────────────────────────
             Padding(
