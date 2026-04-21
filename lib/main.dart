@@ -160,8 +160,10 @@ class _MainShellState extends State<MainShell> {
         ),
         title: Row(
           children: [
-            Icon(_tabIcons[_currentIndex],
-              size: 20, color: DocNestTheme.accent),
+            Image.asset(
+              'assets/images/logo_nobg.png',
+              width: 32, height: 32,
+            ),
             const SizedBox(width: 8),
             Text(
               _tabTitles[_currentIndex],

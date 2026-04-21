@@ -176,10 +176,10 @@ class _AppDrawerState extends State<AppDrawer> {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
             ),
-            child: const Icon(
-              Icons.document_scanner_rounded,
-              color: Colors.white,
-              size: 28,
+            child: Image.asset(
+              'assets/images/logo_nobg.png',
+              width: 16,
+              height: 16,
             ),
           ),
           const SizedBox(height: 14),

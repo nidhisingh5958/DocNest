@@ -49,6 +49,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   material_symbols_icons: ^4.2755.0
 
+  # Logo and SplashScreen
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -59,3 +63,16 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo_no_text.png"
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/logo.png 
