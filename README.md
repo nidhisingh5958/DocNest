@@ -5,22 +5,20 @@ No cloud. No login. No tracking. Just clean, fast scanning.
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Details |
 |---|---|
-| 📷 Scan | Camera-based scanning with automatic edge detection |
-| 🖼️ Filters | Original · Grayscale · Black & White · Enhanced |
-| 📑 Multi-page | Scan multiple pages into a single PDF |
-| 🗂️ Organization | Year/Category folder structure + tags |
-| 🔍 OCR Search | Offline text extraction (Google ML Kit) |
-| 📤 Local Share | Bluetooth · Wi-Fi Direct · Nearby Share |
-| 🔒 App Lock | Biometrics or PIN (optional) |
-| 🌙 Minimal UI | Clean light theme, 3-tab nav |
+| Scan | Camera-based scanning with automatic edge detection |
+| Filters | Original · Grayscale · Black & White · Enhanced |
+| Multi-page | Scan multiple pages into a single PDF |
+| Organization | Year/Category folder structure + tags |
+| OCR Search | Offline text extraction (Google ML Kit) |
+| Local Share | Bluetooth · Wi-Fi Direct · Nearby Share |
+| App Lock | Biometrics or PIN (optional) |
+| Minimal UI | Clean light theme, 3-tab nav |
 
 ---
-
-## 🚀 Quick Setup
 
 ### Prerequisites
 
@@ -74,59 +72,7 @@ flutter build apk --release
 # Output: build/app/outputs/flutter-apk/app-release.apk
 ```
 
----
-
-## 📦 Dependencies
-
-### Core Flutter packages
-
-```yaml
-# Camera & Image capture
-camera: ^0.10.5+9              # Direct camera access
-image_picker: ^1.0.7           # Gallery import
-cunning_document_scanner: ^1.0.3  # Edge detection + document crop
-
-# Image processing
-image: ^4.1.7                  # Grayscale, B&W, contrast filters
-
-# PDF
-pdf: ^3.10.8                   # Pure-Dart PDF generation
-printing: ^5.12.0              # PDF preview/printing
-
-# Local Database
-sqflite: ^2.3.2                # SQLite for document metadata
-path_provider: ^2.1.2          # Device directory paths
-path: ^1.9.0                   # Path joining utilities
-
-# File operations
-share_plus: ^9.0.0             # System share sheet (Bluetooth, Wi-Fi Direct)
-open_filex: ^4.3.4             # Open PDF in external viewer
-file_picker: ^8.0.3            # Import existing files
-
-# OCR (fully offline, on-device ML)
-google_mlkit_text_recognition: ^0.13.0  # No internet required
-
-# Authentication
-local_auth: ^2.1.8             # Biometrics / fingerprint / face ID
-
-# UI
-flutter_staggered_grid_view: ^0.7.0  # Masonry grid layout
-flutter_slidable: ^3.1.0             # Swipe-to-delete
-intl: ^0.19.0                        # Date formatting
-material_symbols_icons: ^4.2755.0   # Extended icon set
-```
-
-### Why these packages?
-
-- **`cunning_document_scanner`** — wraps native Android document detection (no custom OpenCV needed)
-- **`google_mlkit_text_recognition`** — runs fully on-device using the ML Kit models bundled in the app; zero internet calls
-- **`sqflite`** with FTS4 virtual tables enables fast full-text search across OCR results
-- **`share_plus`** delegates to the Android system share sheet, which natively handles Bluetooth, Nearby Share, and Wi-Fi Direct without any extra code
-- **`pdf`** is a pure-Dart library — no native dependencies, no crashes
-
----
-
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 docnest/
@@ -176,7 +122,7 @@ docnest/
 
 ---
 
-## 🏗️ Architecture: 3-Layer Design
+## Architecture: 3-Layer Design
 
 ```
 ┌─────────────────────────────────────────┐
@@ -199,7 +145,7 @@ docnest/
 
 ---
 
-## 📂 Local File Structure (on device)
+## Local File Structure (on device)
 
 ```
 /data/user/0/<package>/files/DocNest/
@@ -217,7 +163,7 @@ docnest/
 
 ---
 
-## 🔐 Permissions Explained
+## Permissions Explained
 
 | Permission | Why |
 |---|---|
@@ -233,7 +179,7 @@ docnest/
 
 ---
 
-## 🎨 Design System
+## Design System
 
 | Token | Value |
 |---|---|
@@ -253,7 +199,7 @@ docnest/
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Camera not opening
 - Check that `CAMERA` permission is granted in device settings
@@ -286,26 +232,3 @@ cd android
 cd ..
 flutter run
 ```
-
----
-
-## 📋 Minimum Requirements
-
-- **Android 7.0** (API 24) or higher
-- **~80 MB** storage for the app + ML Kit model
-- **Camera** with autofocus (for edge detection quality)
-
----
-
-## 🔮 Possible Enhancements
-
-- [ ] Password-protected PDFs
-- [ ] Document merging (combine multiple PDFs)
-- [ ] QR code scanning mode
-- [ ] Dark theme
-- [ ] Widget for quick-scan from home screen
-- [ ] Auto-backup to local NAS via FTP/SMB
-
----
-
-Built with Flutter · No backend · No cloud · No tracking

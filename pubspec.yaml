@@ -11,37 +11,37 @@ dependencies:
     sdk: flutter
 
   # Camera & Image
-  camera: ^0.10.5+9
+  camera: ^0.12.0+1
   image_picker: ^1.0.7
   image: ^4.1.7
 
   # Edge detection & document scanning
-  cunning_document_scanner: ^1.0.3
+  cunning_document_scanner: ^1.0.3  # wraps native Android document detection
 
   # PDF generation
-  pdf: ^3.10.8
+  pdf: ^3.10.8 
   printing: ^5.12.0
 
   # Local database
-  sqflite: ^2.3.2
+  sqflite: ^2.3.2. # with FTS4 virtual tables enables fast full-text search across OCR results
   path_provider: ^2.1.2
   path: ^1.9.0
 
   # File operations
-  share_plus: ^9.0.0
+  share_plus: ^12.0.2 # delegates to the Android system share sheet, which natively handles Bluetooth, Nearby Share, and Wi-Fi Direct without any extra code
   open_filex: ^4.3.4
-  file_picker: ^8.0.3
+  file_picker: ^11.0.2
 
   # OCR (offline via Google ML Kit)
-  google_mlkit_text_recognition: ^0.13.0
+  google_mlkit_text_recognition: ^0.15.1  # runs fully on-device using the ML Kit models bundled in the app; zero internet calls
 
   # Local auth (biometrics/PIN)
-  local_auth: ^2.1.8
+  local_auth: ^3.0.1
 
   # UI & UX
   flutter_staggered_grid_view: ^0.7.0
-  intl: ^0.19.0
-  flutter_slidable: ^3.1.0
+  intl: ^0.20.2
+  flutter_slidable: ^4.0.3
   lottie: ^3.1.0
 
   # Icons
@@ -51,7 +51,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
